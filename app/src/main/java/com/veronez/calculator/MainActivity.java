@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button numeroZero, numeroUm, numeroDois, numeroTres, numeroQuatro, numeroCinco, numeroSeis, numeroSete,
@@ -64,6 +67,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txtResultado.setText("");
             }
         });
+
+        igual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Expression expressao = new ExpressionBuilder(txtExprecao.getText().toString()).build();
+                double resultado = expressao.evaluate();
+                long longResult = (long) resultado;
+                if (resultado == (double)longResult){
+                    txtResultado.setText((CharSequence) String.valueOf(longResult));
+                }
+            }
+        });
+
     }
 
     private void iniciarComponentes(){
