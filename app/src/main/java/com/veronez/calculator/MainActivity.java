@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        iniciarComponentes();
         getSupportActionBar().hide();
 
         numeroZero.setOnClickListener(this);
@@ -72,12 +73,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
 
-                Expression expressao = new ExpressionBuilder(txtExprecao.getText().toString()).build();
-                double resultado = expressao.evaluate();
-                long longResult = (long) resultado;
-                if (resultado == (double)longResult){
-                    txtResultado.setText((CharSequence) String.valueOf(longResult));
-                }
+
+                    Expression expressao = new ExpressionBuilder(txtExprecao.getText().toString()).build();
+                    double resultado = expressao.evaluate();
+                    long longResult = (long) resultado;
+
+                    if (resultado == (double)longResult){
+                        txtResultado.setText((CharSequence) String.valueOf(longResult));
+                    }else{
+                        txtResultado.setText((CharSequence) String.valueOf(resultado));
+                    }
+
+
+
             }
         });
 
@@ -112,16 +120,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void AcrescentarUmaExprecao(String string, Boolean limpar_dados){
 
         if (txtResultado.getText().equals("")){
-            txtExprecao.setText("");
+            txtExprecao.setText(" ");
         }
 
         if (limpar_dados){
-            txtResultado.setText("");
+            txtResultado.setText(" ");
             txtExprecao.append(string);
         }else{
             txtExprecao.append(txtResultado.getText());
             txtExprecao.append(string);
-            txtResultado.setText("");
+            txtResultado.setText(" ");
         }
 
     }
